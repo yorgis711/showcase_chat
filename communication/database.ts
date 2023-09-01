@@ -147,13 +147,13 @@ export class Database {
 export const databaseLoader = new ResourceLoader<Database>({
   async load() {
     // Automatically create the database schema on startup.
-    const caCert = getEnvOrThrow("SUPABASE_CA_CERTIFICATE").replace(
-      /\s+(?!CERTIFICATE--)/g,
-      "\n",
-    );
+   // const caCert = getEnvOrThrow("SUPABASE_CA_CERTIFICATE").replace(
+     // /\s+(?!CERTIFICATE--)/g,
+      //"\n",
+    //);
     const sql = postgres(getEnvOrThrow("SUPABASE_POSTGRES_URI"), {
       keep_alive: false, // Otherwise required '--unstable' flag.
-      ssl: { caCerts: [caCert] },
+      ssl: false,
     });
     await sql`
       create table if not exists users (
